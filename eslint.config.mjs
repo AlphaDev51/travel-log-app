@@ -9,6 +9,7 @@ export default withNuxt(
       vue: true,
       typescript: true,
       formatters: true,
+      tailwind: true,
       stylistic: {
         indent: 2,
         semi: true,
