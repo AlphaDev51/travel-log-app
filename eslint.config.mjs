@@ -14,6 +14,7 @@ export default withNuxt(
         semi: true,
         quotes: "double",
       },
+      ignores: ["pnpm-store/**"],
     },
     {
       rules: {
@@ -29,6 +30,7 @@ export default withNuxt(
           //   tsconfigRootdDir: ".",
           // },
         ],
+
         "unicorn/filename-case": [
           "error",
           {
