@@ -23,7 +23,8 @@
     "tailwindcss": "^4.3.1",
     "travel-log-app": "link:",
     "vue": "^3.5.34",
-    "vue-router": "^5.0.7"
+    "vue-router": "^5.0.7",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@iconify-json/tabler": "^1.2.35",
