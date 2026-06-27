@@ -12,6 +12,13 @@ export default defineNuxtConfig({
       standalone: false,
     },
   },
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        types: ["node"],
+      },
+    },
+  },
   css: ["./app/assets/css/main.css"],
   vite: {
     plugins: [
