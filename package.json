@@ -41,6 +41,7 @@
     "lint-staged": "^17.0.7"
   },
   "lint-staged": {
-    "*": "pnpm lint"
+    "*": "pnpm lint",
+    "*.{ts,js,vue,yaml}": "eslint --fix"
   }
 }
