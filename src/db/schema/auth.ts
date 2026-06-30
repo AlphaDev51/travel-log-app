@@ -6,19 +6,22 @@ export const user = sqliteTable("user", {
   name: text().notNull(),
   email: text().notNull().unique(),
   emailVerified: integer({ mode: "boolean" }).default(false).notNull(),
-  createdAt: integer().notNull(),
-  updatedAt: integer().notNull(),
+  image: text(),
+  createdAt: integer({ mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer({ mode: "timestamp_ms" }).notNull(),
 });
 
 export const session = sqliteTable(
   "session",
   {
     id: int().primaryKey({ autoIncrement: true }),
-    expiresAt: integer().notNull(),
+    expiresAt: integer({ mode: "timestamp_ms" }).notNull(),
     token: text().notNull().unique(),
-    createdAt: integer().notNull(),
-    updatedAt: integer().notNull(),
-    userId: integer() // Corrigé ici en integer pour correspondre à user.id
+    createdAt: integer({ mode: "timestamp_ms" }).notNull(),
+    updatedAt: integer({ mode: "timestamp_ms" }).notNull(),
+    ipAddress: text(),
+    userAgent: text(),
+    userId: integer()
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
   },
@@ -31,20 +34,33 @@ export const account = sqliteTable(
     id: int().primaryKey({ autoIncrement: true }),
     accountId: text().notNull(),
     providerId: text().notNull(),
-    userId: integer() // Corrigé ici en integer pour correspondre à user.id
+    userId: integer()
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
     accessToken: text(),
     refreshToken: text(),
     idToken: text(),
-    accessTokenExpiresAt: integer(),
-    refreshTokenExpiresAt: integer(),
+    accessTokenExpiresAt: integer({ mode: "timestamp_ms" }),
+    refreshTokenExpiresAt: integer({ mode: "timestamp_ms" }),
     scope: text(),
     password: text(),
-    createdAt: integer().notNull(),
-    updatedAt: integer().notNull(),
+    createdAt: integer({ mode: "timestamp_ms" }).notNull(),
+    updatedAt: integer({ mode: "timestamp_ms" }).notNull(),
   },
   table => [index("account_userId_idx").on(table.userId)],
+);
+
+export const verification = sqliteTable(
+  "verification",
+  {
+    id: int().primaryKey({ autoIncrement: true }),
+    identifier: text().notNull(),
+    value: text().notNull(),
+    expiresAt: integer({ mode: "timestamp_ms" }).notNull(),
+    createdAt: integer({ mode: "timestamp_ms" }).notNull(),
+    updatedAt: integer({ mode: "timestamp_ms" }).notNull(),
+  },
+  table => [index("verification_identifier_idx").on(table.identifier)],
 );
 
 // --- RELATIONS DRIZZLE ---
