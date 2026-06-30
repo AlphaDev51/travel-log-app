@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import AuthButton from "~/components/auth-button.vue";
+</script>
+
 <template>
   <div class="hero bg-base-300 container mx-auto mt-4">
     <div class="hero-content text-center min-h-96">
@@ -9,10 +13,7 @@
           A clean space to save your favorite locations, photos,
           and the raw moments that define your adventures around the world.
         </p>
-        <button class="btn btn-accent">
-          Sign In With Github
-          <Icon name="tabler:brand-github" size="24" />
-        </button>
+        <AuthButton>Sign In With Github</AuthButton>
       </div>
     </div>
   </div>

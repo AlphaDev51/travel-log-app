@@ -1,0 +1,24 @@
+import { createAuthClient } from "better-auth/client";
+import { defineStore } from "pinia";
+
+const authClient = createAuthClient();
+
+export const useAuthStore = defineStore("useAuthStore", () => {
+  const loading = ref(false);
+
+  const signIn = async () => {
+    loading.value = true;
+    const data = await authClient.signIn.social({
+      provider: "github",
+      callbackURL: "/dashboard",
+      errorCallbackURL: "/error",
+    });
+    loading.value = false;
+    console.log(data);
+  };
+
+  return {
+    loading,
+    signIn,
+  };
+});
