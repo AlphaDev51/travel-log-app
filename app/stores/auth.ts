@@ -1,5 +1,4 @@
 import { createAuthClient } from "better-auth/client";
-import { defineStore } from "pinia";
 
 const authClient = createAuthClient();
 
