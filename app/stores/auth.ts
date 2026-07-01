@@ -6,14 +6,18 @@ export const useAuthStore = defineStore("useAuthStore", () => {
   const loading = ref(false);
 
   const signIn = async () => {
-    loading.value = true;
-    const data = await authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/dashboard",
-      errorCallbackURL: "/error",
-    });
-    loading.value = false;
-    console.log(data);
+    try {
+      loading.value = true;
+
+      await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/dashboard",
+        errorCallbackURL: "/error",
+      });
+    }
+    catch {
+      loading.value = false;
+    }
   };
 
   return {
