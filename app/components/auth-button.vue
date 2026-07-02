@@ -9,7 +9,7 @@ const authStore = useAuthStore();
     :disabled="authStore.loading" class="btn btn-accent"
     @click="!authStore.loading && authStore.signIn()"
   >
-    <span v-if="authStore.loading" class="loading loading-dots loading-md" />
+    <span v-if="authStore.loading" class="loading loading-dots loading-md animate-pulse" />
     <span v-else>
       <slot />
       <Icon name="tabler:brand-github" size="24" />
