@@ -5,13 +5,23 @@ import "./lib/env";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
+  devtools: { enabled: process.env.NODE_ENV !== "production" },
+
+  nitro: {
+    preset: "vercel",
+    externals: {
+      inline: ["better-auth"],
+    },
+  },
+
   modules: ["@nuxt/eslint", "@nuxt/icon", "@nuxtjs/color-mode", "@pinia/nuxt"],
+
   eslint: {
     config: {
       standalone: false,
     },
   },
+
   typescript: {
     tsConfig: {
       compilerOptions: {
@@ -19,15 +29,16 @@ export default defineNuxtConfig({
       },
     },
   },
+
   css: ["./app/assets/css/main.css"],
+
   vite: {
     optimizeDeps: {
       include: ["better-auth/client"],
     },
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
+
   colorMode: {
     dataValue: "theme",
   },
