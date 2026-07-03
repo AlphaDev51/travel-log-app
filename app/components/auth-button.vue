@@ -28,7 +28,7 @@ const authStore = useAuthStore();
     >
       <li>
         <NuxtLink
-          to="/signOut"
+          to="/signout"
           class="flex items-center justify-between text-error hover:bg-error/10 active:bg-error/20 px-3 py-2.5 rounded-lg transition-colors group"
         >
           <span class="font-medium text-sm">Log Out</span>
