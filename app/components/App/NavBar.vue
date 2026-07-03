@@ -10,7 +10,7 @@ import ThemeToggle from "./ThemeToggle.vue";
         travelLog
       </NuxtLink>
     </div>
-    <div class="navbar-end flex flex-row gap-8 items-baseline-last">
+    <div class="navbar-end flex flex-row items-center gap-8 ">
       <ThemeToggle />
       <AuthButton>Sign In</AuthButton>
     </div>
