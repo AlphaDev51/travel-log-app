@@ -2,6 +2,7 @@
 import { useAuthStore } from "~/stores/auth";
 
 const authStore = useAuthStore();
+await authStore.init();
 </script>
 
 <template>
@@ -46,11 +47,16 @@ const authStore = useAuthStore();
   <button
     v-else
     :disabled="authStore.loading"
-    class="btn btn-accent px-5 font-medium rounded-xl shadow-md shadow-accent/10 hover:shadow-lg hover:shadow-accent/20 active:scale-95 transition-all duration-200"
+    class="btn btn-accent px-5 font-medium rounded-xl shadow-md
+     shadow-accent/10 hover:shadow-lg hover:shadow-accent/20 active:scale-95
+     transition-all duration-200"
     @click="authStore.signIn()"
   >
     <!-- Effet de pulsation fluide sur le chargement -->
-    <span v-if="authStore.loading" class="loading loading-spinner loading-md text-accent-content/70 animate-spin" />    <!-- Contenu normal centré -->
+    <span
+      v-if="authStore.loading" class="loading loading-spinner
+    loading-md text-accent-content/70 animate-spin"
+    />    <!-- Contenu normal centré -->
     <span v-else class="flex items-center gap-2">
       <slot />
       <Icon name="tabler:brand-github" size="20" />

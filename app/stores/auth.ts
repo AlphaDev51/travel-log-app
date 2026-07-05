@@ -1,26 +1,24 @@
+// stores/auth.ts
 import { createAuthClient } from "better-auth/vue";
-import { computed, ref } from "vue";
+import { computed, ref, toValue } from "vue";
 
 const authClient = createAuthClient();
 
 export const useAuthStore = defineStore("useAuthStore", () => {
-  const session = authClient.useSession();
+  const session = useState<Awaited<ReturnType<typeof authClient.useSession>> | null>("auth-session", () => null);
+  const actionLoading = ref(false);
 
-  // Variable unique pour traquer le clic (login / logout)
-  const isActionPending = ref(false);
+  const init = async () => {
+    if (session.value)
+      return;
+    session.value = await authClient.useSession(useFetch);
+  };
 
-  const user = computed(() => session.value.data?.user);
-
-  // Fusionne le chargement de la session initiale ET l'état du clic
-  const loading = computed(() =>
-    session.value.isPending
-    || session.value.isRefetching
-    || isActionPending.value,
-  );
+  const loading = computed(() => (session.value?.isPending ?? false) || actionLoading.value);
+  const user = computed(() => toValue(session.value?.data)?.user ?? null);
 
   const signIn = async () => {
-    isActionPending.value = true;
-
+    actionLoading.value = true;
     try {
       await authClient.signIn.social({
         provider: "github",
@@ -28,29 +26,22 @@ export const useAuthStore = defineStore("useAuthStore", () => {
         errorCallbackURL: "/error",
       });
     }
-    catch {
-      isActionPending.value = false; // On reset discrètement sans rien print
+    catch (error) {
+      console.error(error);
+      actionLoading.value = false;
     }
   };
 
   const signOut = async () => {
-    isActionPending.value = true;
-
+    actionLoading.value = true;
     try {
       await authClient.signOut();
-    }
-    catch {
-      // On ne fait rien si ça échoue
+      session.value = { data: null, isPending: false, error: null } as unknown as typeof session.value;
     }
     finally {
-      isActionPending.value = false;
+      actionLoading.value = false;
     }
   };
 
-  return {
-    loading,
-    signIn,
-    signOut,
-    user,
-  };
+  return { loading, signIn, signOut, user, init };
 });
