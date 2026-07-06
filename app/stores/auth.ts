@@ -8,7 +8,6 @@ export const useAuthStore = defineStore("useAuthStore", () => {
   const session = ref<any>(null);
   const isSessionPending = ref(true);
 
-  // 🌟 On gère l'état de chargement des boutons (signIn / signOut)
   const actionLoading = ref(false);
 
   const init = async () => {
@@ -33,7 +32,7 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 
   const signIn = async () => {
     if (actionLoading.value)
-      return; // Bloque les clics multiples
+      return;
     actionLoading.value = true;
     try {
       await authClient.signIn.social({
