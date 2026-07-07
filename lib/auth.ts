@@ -5,16 +5,10 @@ import * as schema from "../src/db/schema";
 import env from "./env";
 
 export const auth = betterAuth({
-  // 🌟 Plus de hook "after" ou de "createAuthMiddleware" ici,
-  // Better-Auth gère nativement le retour de /get-session
-  database: drizzleAdapter(db, {
-    provider: "sqlite",
-    schema,
-  }),
+  baseURL: env.BETTER_AUTH_URL,
+  database: drizzleAdapter(db, { provider: "sqlite", schema }),
   advanced: {
-    database: {
-      generateId: false,
-    },
+    database: { generateId: false },
   },
   socialProviders: {
     github: {
