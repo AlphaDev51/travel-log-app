@@ -2,7 +2,13 @@
 import { createAuthClient } from "better-auth/vue";
 import { computed, ref } from "vue";
 
-const authClient = createAuthClient();
+let authClient: ReturnType<typeof createAuthClient>;
+function getAuthClient() {
+  if (!authClient) {
+    authClient = createAuthClient();
+  }
+  return authClient;
+}
 
 export const useAuthStore = defineStore("useAuthStore", () => {
   const session = ref<any>(null);
@@ -13,9 +19,11 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     if (session.value)
       return;
 
+    // Récupération sécurisée uniquement côté serveur
     const headers = import.meta.server ? useRequestHeaders(["cookie"]) : undefined;
+    const client = getAuthClient();
 
-    const useSessionRef = await authClient.useSession(url =>
+    const useSessionRef = await client.useSession(url =>
       useFetch(url, {
         key: "better-auth-session",
         headers: headers as Record<string, string>,
@@ -34,12 +42,14 @@ export const useAuthStore = defineStore("useAuthStore", () => {
       return;
     actionLoading.value = true;
     try {
-      await authClient.signIn.social({
+      const client = getAuthClient();
+      await client.signIn.social({
         provider: "github",
         callbackURL: "/dashboard",
       });
     }
-    catch {
+    catch (error) {
+      console.error(error);
       actionLoading.value = false;
     }
   };
@@ -49,12 +59,14 @@ export const useAuthStore = defineStore("useAuthStore", () => {
       return;
     actionLoading.value = true;
     try {
-      await authClient.signOut();
+      const client = getAuthClient();
+      await client.signOut();
       if (session.value) {
         session.value.value = null;
       }
     }
-    catch {
+    catch (error) {
+      console.error(error);
     }
     finally {
       actionLoading.value = false;
