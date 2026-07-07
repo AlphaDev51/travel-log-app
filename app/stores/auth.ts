@@ -7,7 +7,7 @@ const authClient = createAuthClient();
 export const useAuthStore = defineStore("useAuthStore", () => {
   const actionLoading = ref(false);
 
-  const { data: session, isPending } = authClient.useSession(useFetch);
+  const { data: session, isPending } = authClient.useSession();
 
   const user = computed(() => session.value?.user ?? null);
   const loading = computed(() => isPending.value || actionLoading.value);
