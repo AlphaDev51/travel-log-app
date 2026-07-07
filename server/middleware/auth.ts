@@ -13,8 +13,13 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     if (session.value)
       return;
 
+    const headers = import.meta.server ? useRequestHeaders(["cookie"]) : undefined;
+
     const useSessionRef = await authClient.useSession(url =>
-      useFetch(url, { key: "better-auth-session" }),
+      useFetch(url, {
+        key: "better-auth-session",
+        headers: headers as Record<string, string>,
+      }),
     );
 
     session.value = useSessionRef.data;
