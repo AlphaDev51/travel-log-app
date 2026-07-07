@@ -27,7 +27,11 @@ export const useAuthStore = defineStore("useAuthStore", () => {
   };
 
   const loading = computed(() => isSessionPending.value || actionLoading.value);
-  const user = computed(() => session.value?.value?.user ?? null);
+
+  const user = computed(() => {
+    const data = session.value?.value || session.value;
+    return data?.user ?? null;
+  });
 
   const signIn = async () => {
     if (actionLoading.value)
@@ -52,7 +56,12 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     try {
       await authClient.signOut();
       if (session.value) {
-        session.value.value = null;
+        if (session.value.value) {
+          session.value.value = null;
+        }
+        else {
+          session.value = null;
+        }
       }
     }
     catch (error) {
