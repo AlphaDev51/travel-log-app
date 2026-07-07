@@ -9,16 +9,23 @@ export const useAuthStore = defineStore("useAuthStore", () => {
   const isSessionPending = ref(true);
 
   const actionLoading = ref(false);
-
   const init = async () => {
     if (session.value)
       return;
 
     const clientHeaders = useRequestHeaders(["cookie"]);
 
+    // 🌟 LA CORRECTION : Trouver l'URL de base (localhost en dev, domaine principal en prod)
+    let baseURL = "";
+    if (import.meta.server) {
+      // En prod Vercel, on utilise l'URL système ou ton domaine configuré
+      baseURL = process.env.BETTER_AUTH_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    }
+
     const useSessionRef = await authClient.useSession(url =>
       useFetch(url, {
         key: "better-auth-session",
+        baseURL,
         headers: clientHeaders as Record<string, string>,
       }),
     );
