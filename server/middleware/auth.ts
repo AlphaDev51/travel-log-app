@@ -39,8 +39,7 @@ export const useAuthStore = defineStore("useAuthStore", () => {
         callbackURL: "/dashboard",
       });
     }
-    catch (error) {
-      console.error(error);
+    catch {
       actionLoading.value = false;
     }
   };
@@ -55,8 +54,7 @@ export const useAuthStore = defineStore("useAuthStore", () => {
         session.value.value = null;
       }
     }
-    catch (error) {
-      console.error(error);
+    catch {
     }
     finally {
       actionLoading.value = false;
