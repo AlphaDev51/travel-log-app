@@ -5,33 +5,12 @@ import { computed, ref } from "vue";
 const authClient = createAuthClient();
 
 export const useAuthStore = defineStore("useAuthStore", () => {
-  const session = ref<any>(null);
-  const isSessionPending = ref(true);
   const actionLoading = ref(false);
 
-  const init = async () => {
-    if (session.value)
-      return;
+  const { data: session, isPending } = authClient.useSession(useFetch);
 
-    const headers = import.meta.server ? useRequestHeaders(["cookie"]) : undefined;
-
-    const useSessionRef = await authClient.useSession(url =>
-      useFetch(url, {
-        key: "better-auth-session",
-        headers: headers as Record<string, string>,
-      }),
-    );
-
-    session.value = useSessionRef.data;
-    isSessionPending.value = useSessionRef.isPending as unknown as boolean;
-  };
-
-  const loading = computed(() => isSessionPending.value || actionLoading.value);
-
-  const user = computed(() => {
-    const data = session.value?.value || session.value;
-    return data?.user ?? null;
-  });
+  const user = computed(() => session.value?.user ?? null);
+  const loading = computed(() => isPending.value || actionLoading.value);
 
   const signIn = async () => {
     if (actionLoading.value)
@@ -55,14 +34,6 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     actionLoading.value = true;
     try {
       await authClient.signOut();
-      if (session.value) {
-        if (session.value.value) {
-          session.value.value = null;
-        }
-        else {
-          session.value = null;
-        }
-      }
     }
     catch (error) {
       console.error(error);
@@ -72,5 +43,5 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     }
   };
 
-  return { user, loading, signIn, signOut, init };
+  return { user, loading, signIn, signOut };
 });
