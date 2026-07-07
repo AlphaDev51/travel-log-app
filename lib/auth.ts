@@ -5,10 +5,10 @@ import db from "../src/db/index";
 import * as schema from "../src/db/schema";
 import env from "./env";
 
-export const auth = betterAuth({
-  // 🌟 Ajout de l'URL de base pour valider l'Origin en production
-  baseURL: process.env.BETTER_AUTH_URL,
+const siteUrl = process.env.BETTER_AUTH_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
+export const auth = betterAuth({
+  baseURL: siteUrl,
   database: drizzleAdapter(db, {
     provider: "sqlite",
     schema,
@@ -17,13 +17,8 @@ export const auth = betterAuth({
     database: {
       generateId: false,
     },
-    crossSubDomainCookie: {
-      enabled: true,
-    },
+    disableDynamicOrigin: true,
   },
-  trustedOrigins: [
-    "https://travel-log-app-coral.vercel.app",
-  ],
   socialProviders: {
     github: {
       clientId: env.AUTH_GITHUB_CLIENT_ID,
