@@ -1,11 +1,62 @@
-import { auth } from "~~/lib/auth";
+// stores/auth.ts
+import { createAuthClient } from "better-auth/vue";
+import { computed, ref } from "vue";
 
-export default defineEventHandler(async (event) => {
-  if (event.path.startsWith("/dashboard")) {
-    const session = await auth.api.getSession({ headers: event.headers });
+const authClient = createAuthClient();
 
-    if (!session) {
-      await sendRedirect(event, "/", 302);
+export const useAuthStore = defineStore("useAuthStore", () => {
+  const session = ref<any>(null);
+  const isSessionPending = ref(true);
+  const actionLoading = ref(false);
+
+  const init = async () => {
+    if (session.value)
+      return;
+
+    const useSessionRef = await authClient.useSession(url =>
+      useFetch(url, { key: "better-auth-session" }),
+    );
+
+    session.value = useSessionRef.data;
+    isSessionPending.value = useSessionRef.isPending as unknown as boolean;
+  };
+
+  const loading = computed(() => isSessionPending.value || actionLoading.value);
+  const user = computed(() => session.value?.value?.user ?? null);
+
+  const signIn = async () => {
+    if (actionLoading.value)
+      return;
+    actionLoading.value = true;
+    try {
+      await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/dashboard",
+      });
     }
-  }
+    catch (error) {
+      console.error(error);
+      actionLoading.value = false;
+    }
+  };
+
+  const signOut = async () => {
+    if (actionLoading.value)
+      return;
+    actionLoading.value = true;
+    try {
+      await authClient.signOut();
+      if (session.value) {
+        session.value.value = null;
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+    finally {
+      actionLoading.value = false;
+    }
+  };
+
+  return { user, loading, signIn, signOut, init };
 });
