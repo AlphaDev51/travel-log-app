@@ -17,7 +17,6 @@ export const auth = betterAuth({
     database: {
       generateId: false,
     },
-    disableDynamicOrigin: true,
   },
   socialProviders: {
     github: {
