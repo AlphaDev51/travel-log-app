@@ -5,18 +5,12 @@ import { computed } from "vue";
 const authClient = createAuthClient();
 
 export const useAuthStore = defineStore("useAuthStore", () => {
-  const headers = import.meta.server ? useRequestHeaders(["cookie"]) : undefined;
-
-  const { data: session, status } = useAsyncData("auth-session", async () => {
-    const res = await authClient.getSession({
-      fetchOptions: {
-        headers: headers as Record<string, string>,
-      },
-    });
-    return res.data;
+  const { data: session, status } = useFetch<{ user: any; session: any } | null>("/api/session", {
+    key: "auth-user-session",
   });
 
   const user = computed(() => session.value?.user ?? null);
+
   const loading = computed(() => status.value === "pending");
 
   const signIn = async () => {

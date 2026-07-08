@@ -1,6 +1,4 @@
 <script setup lan="ts">
-const authStore = useAuthStore();
-await authStore.init();
 </script>
 
 <template>

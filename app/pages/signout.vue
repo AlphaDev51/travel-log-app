@@ -3,7 +3,6 @@ const authStore = useAuthStore();
 
 onMounted(async () => {
   await authStore.signOut();
-  navigateTo("/");
 });
 </script>
 
