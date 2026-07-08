@@ -52,10 +52,7 @@ const authStore = useAuthStore();
     @click="authStore.signIn()"
   >
     <!-- Effet de pulsation fluide sur le chargement -->
-    <span
-      v-if="authStore.loading" class="loading loading-spinner
-    loading-md text-accent-content/70 animate-spin"
-    />    <!-- Contenu normal centré -->
+    <span v-if="authStore.loading" class="loading loading-spinner loading-md" />
     <span v-else class="flex items-center gap-2">
       <slot />
       <Icon name="tabler:brand-github" size="20" />
