@@ -14,9 +14,15 @@ export const useAuthStore = defineStore("useAuthStore", () => {
   const signIn = async () => {
     loading.value = true;
     try {
+      const { csrf } = useCsrf();
+      const headers = new Headers();
+      headers.append("csrf-token", csrf);
       await authClient.signIn.social({
         provider: "github",
         callbackURL: "/dashboard",
+        fetchOptions: {
+          headers,
+        },
       });
     }
     catch (error) {
@@ -28,7 +34,14 @@ export const useAuthStore = defineStore("useAuthStore", () => {
   const signOut = async () => {
     loading.value = true;
     try {
-      await authClient.signOut();
+      const { csrf } = useCsrf();
+      const headers = new Headers();
+      headers.append("csrf-token", csrf);
+      await authClient.signOut({
+        fetchOptions: {
+          headers,
+        },
+      });
       session.value = null;
       navigateTo("/");
     }

@@ -10,7 +10,7 @@ const route = useRoute();
 
 <template>
   <div
-    class="w-full tooltip-info tooltip-right text-xs"
+    class="w-full tooltip-right text-xs"
     :data-tip="props.showLabel ? undefined : props.label"
     :class="{ tooltip: !props.showLabel }"
   >

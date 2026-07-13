@@ -64,15 +64,15 @@ export const verification = sqliteTable(
 );
 
 // --- RELATIONS DRIZZLE ---
-export const userRelations = relations(user, ({ many }) => ({
+export const userRelations = relations(user, ({ many }: any) => ({
   sessions: many(session),
   accounts: many(account),
 }));
 
-export const sessionRelations = relations(session, ({ one }) => ({
+export const sessionRelations = relations(session, ({ one }: any) => ({
   user: one(user, { fields: [session.userId], references: [user.id] }),
 }));
 
-export const accountRelations = relations(account, ({ one }) => ({
+export const accountRelations = relations(account, ({ one }: any) => ({
   user: one(user, { fields: [account.userId], references: [user.id] }),
 }));
