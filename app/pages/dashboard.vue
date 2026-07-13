@@ -30,13 +30,29 @@ onMounted(() => {
       </div>
 
       <div class="flex flex-col gap-1.5 py-2">
-        <SidebarButton :show-label="isSidebarOpen" label="Location" icon="tabler:map" href="/dashboard" />
-        <SidebarButton :show-label="isSidebarOpen" label="Add Location" icon="tabler:circle-plus-filled" href="/dashboard/add" />
+        <SidebarButton
+          :show-label="isSidebarOpen"
+          label="Location"
+          icon="tabler:map"
+          href="/dashboard"
+        />
+        <SidebarButton
+          :show-label="isSidebarOpen"
+          label="Add Location"
+          icon="tabler:circle-plus-filled"
+          href="/dashboard/add"
+        />
         <div class="divider my-1 opacity-60 px-4" />
-        <SidebarButton :show-label="isSidebarOpen" label="Sign Out" icon="tabler:logout" href="/signout" />
+        <SidebarButton
+          :show-label="isSidebarOpen"
+          label="Sign Out"
+          icon="tabler:logout"
+          href="/signout"
+        />
       </div>
     </div>
 
-    <div class="flex-1 bg-base-100 p-6" />
+    <div class=" bg-base-100 p-6" />
+    <nuxtPage />
   </div>
 </template>
