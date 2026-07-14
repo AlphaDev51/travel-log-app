@@ -53,12 +53,18 @@ importers:
       eslint:
         specifier: ^10.4.1
         version: 10.6.0(jiti@2.7.0)
+      nanoid:
+        specifier: ^6.0.0
+        version: 6.0.0
       nuxt:
         specifier: ^4.4.6
         version: 4.4.8(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.7))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.7))(@libsql/client@0.17.4)(@parcel/watcher@2.5.6)(@types/node@26.0.1)(@vue/compiler-sfc@3.5.39)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.4)(drizzle-orm@0.45.2(@libsql/client@0.17.4)(kysely@0.29.2)))(drizzle-orm@0.45.2(@libsql/client@0.17.4)(kysely@0.29.2))(esbuild@0.28.1)(eslint@10.6.0(jiti@2.7.0))(ioredis@5.11.1)(lightningcss@1.32.0)(magicast@0.5.3)(optionator@0.9.4)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rollup-plugin-visualizer@7.0.1(rollup@4.62.2))(rollup@4.62.2)(srvx@0.11.18)(terser@5.48.0)(tsx@4.22.4)(typescript@6.0.3)(vite@7.3.6(@types/node@26.0.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(yaml@2.9.0)
       nuxt-csurf:
         specifier: 1.6.6
         version: 1.6.6(magicast@0.5.3)
+      slug:
+        specifier: ^11.0.1
+        version: 11.0.1
       tailwindcss:
         specifier: ^4.3.1
         version: 4.3.2
@@ -84,6 +90,9 @@ importers:
       '@types/node':
         specifier: ^26.0.0
         version: 26.0.1
+      '@types/slug':
+        specifier: ^5.0.9
+        version: 5.0.9
       daisyui:
         specifier: ^5.5.23
         version: 5.6.6
@@ -2442,6 +2451,9 @@ packages:
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
 
+  '@types/slug@5.0.9':
+    resolution: {integrity: sha512-6Yp8BSplP35Esa/wOG1wLNKiqXevpQTEF/RcL/NV6BBQaMmZh4YlDwCgrrFSoUE4xAGvnKd5c+lkQJmPrBAzfQ==}
+
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
@@ -4660,6 +4672,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@6.0.0:
+    resolution: {integrity: sha512-mkUH+rPkwU2qPadJ0oJZOjeZ5Mxn8Q1UhevwkTRWNuUZzyia3h4rhzK39hxaHTk0o2OxB8W2SQ6A8k23ZDi1pQ==}
+    engines: {node: ^22 || ^24 || >=26}
+    hasBin: true
+
   nanostores@1.4.0:
     resolution: {integrity: sha512-i0tloweeudshAEuddpDxcg9Ik6pkPfVsHIgKyf143JrgG7/MOh0+q7BypdLXZPoOP7fOYt1eTcwGkyiVmhJFkA==}
     engines: {node: ^20.0.0 || >=22.0.0}
@@ -5364,6 +5381,10 @@ packages:
   slice-ansi@8.0.0:
     resolution: {integrity: sha512-stxByr12oeeOyY2BlviTNQlYV5xOj47GirPr4yA1hE9JCtxfQN0+tVbkxwCtYDQWhEKWFHsEK48ORg5jrouCAg==}
     engines: {node: '>=20'}
+
+  slug@11.0.1:
+    resolution: {integrity: sha512-VrM060OM/E7rdLQSnp6JHrzFfJFmqQBp0+TMhZStnEB8PfNliaZ9UWYjTHGHLUFVJorZ8TjVd/aKvIxHWU2O7g==}
+    hasBin: true
 
   smob@1.6.2:
     resolution: {integrity: sha512-RQsvleCbF8cVHEv+xuDGaA4pOizFqJ0GgjtMSRo6oP8pnN7WsigHgVGey6aILRBKv4W2YOMHLqbKdnB6hpB9fw==}
@@ -8076,6 +8097,8 @@ snapshots:
 
   '@types/resolve@1.20.2': {}
 
+  '@types/slug@5.0.9': {}
+
   '@types/unist@3.0.3': {}
 
   '@types/ws@8.18.1':
@@ -10504,6 +10527,8 @@ snapshots:
 
   nanoid@3.3.15: {}
 
+  nanoid@6.0.0: {}
+
   nanostores@1.4.0: {}
 
   nanotar@0.3.0: {}
@@ -11517,6 +11542,8 @@ snapshots:
     dependencies:
       ansi-styles: 6.2.3
       is-fullwidth-code-point: 5.1.0
+
+  slug@11.0.1: {}
 
   smob@1.6.2: {}
 
