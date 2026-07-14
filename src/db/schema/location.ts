@@ -1,4 +1,4 @@
-import { int, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { int, real, sqliteTable, text, unique } from "drizzle-orm/sqlite-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { user } from "./auth";
@@ -13,11 +13,12 @@ export const location = sqliteTable("location", {
   userId: int().notNull().references(() => user.id),
   createdAt: int().notNull().$default(() => Date.now()),
   updatedAt: int().notNull().$default(() => Date.now()).$onUpdate(() => Date.now()),
-});
+}, t => [
+  unique().on(t.name, t.userId),
+]);
 
 export const InsertLocation = createInsertSchema(location, {
 
-  // On ajoute ": any" pour calmer le mode strict de TypeScript
   name: (_field: any) => z.string({ message: "Required" })
     .min(1, "Location name is required")
     .max(100),

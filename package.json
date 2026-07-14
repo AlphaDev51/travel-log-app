@@ -29,8 +29,10 @@
     "drizzle-orm": "0.45.2",
     "drizzle-zod": "^0.8.3",
     "eslint": "^10.4.1",
+    "nanoid": "^6.0.0",
     "nuxt": "^4.4.6",
     "nuxt-csurf": "1.6.6",
+    "slug": "^11.0.1",
     "tailwindcss": "^4.3.1",
     "travel-log-app": "link:",
     "vee-validate": "^4.15.1",
@@ -41,6 +43,7 @@
   "devDependencies": {
     "@iconify-json/tabler": "^1.2.35",
     "@types/node": "^26.0.0",
+    "@types/slug": "^5.0.9",
     "daisyui": "^5.5.23",
     "drizzle-kit": "^0.31.10",
     "eslint-plugin-format": "^2.0.1",
