@@ -1,8 +1,9 @@
 import slugify from "slug";
 import { findLocationByName, findUniqueSlug, InsertLocationDB } from "~~/src/db/queries/location";
 import { InsertLocation } from "~~/src/db/schema";
+import { userEventHandlerConnect } from "~~/utils/user-event-handler-connect";
 
-export default defineEventHandler(async (event) => {
+export default userEventHandlerConnect(async (event) => {
   if (!event.context.user) {
     return sendError(event, createError({
       statusCode: 401,
