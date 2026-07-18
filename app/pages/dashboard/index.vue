@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const { data: locations, status } = await useFetch("/api/location", {
-  lazy: true,
+const locationStore = useLocation();
+const { locations, status } = storeToRefs(locationStore);
+onMounted(() => {
+  locationStore.refresh();
 });
 </script>
 
