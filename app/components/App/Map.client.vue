@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import type { Map as MapLibreMap } from "maplibre-gl";
 import { nextTick, onMounted, onUnmounted, ref, watch } from "vue";
+import { getUserLocation } from "~~/utils/coordinates";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 const colorMode = useColorMode();
@@ -15,6 +16,7 @@ function getStyle() {
 }
 
 onMounted(async () => {
+  const { coordinates, zoom } = await getUserLocation();
   await nextTick();
 
   if (!mapContainer.value) {
@@ -28,8 +30,8 @@ onMounted(async () => {
     const mapInstance = new Map({
       container: mapContainer.value,
       style: getStyle(),
-      center: [2.3522, 48.8566],
-      zoom: 4,
+      center: coordinates,
+      zoom,
       trackResize: true,
     });
 
