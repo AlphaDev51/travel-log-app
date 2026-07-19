@@ -13,8 +13,14 @@ export default defineNuxtConfig({
       inline: ["better-auth"],
     },
   },
-
-  modules: ["@nuxt/eslint", "@nuxt/icon", "@nuxtjs/color-mode", "@pinia/nuxt", "@vee-validate/nuxt", "nuxt-csurf"],
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/icon",
+    "@nuxtjs/color-mode",
+    "@pinia/nuxt",
+    "@vee-validate/nuxt",
+    "nuxt-csurf",
+  ],
 
   eslint: {
     config: {
@@ -31,10 +37,9 @@ export default defineNuxtConfig({
   },
 
   css: ["./app/assets/css/main.css"],
-
   vite: {
     optimizeDeps: {
-      include: ["better-auth/client"],
+      include: ["@vee-validate/zod", "better-auth/client", "drizzle-orm", "drizzle-orm/sqlite-core", "maplibre-gl", "drizzle-zod", "zod"],
     },
     plugins: [tailwindcss()],
   },

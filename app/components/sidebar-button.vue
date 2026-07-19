@@ -10,48 +10,24 @@ const route = useRoute();
 
 <template>
   <div
-    class="w-full tooltip-right text-xs"
+    class="w-full text-xs tooltip-right"
     :data-tip="props.showLabel ? undefined : props.label"
     :class="{ tooltip: !props.showLabel }"
   >
     <nuxt-link
       :to="props.href"
-      class="flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl transition-all duration-200 group"
+      class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg transition-colors"
       :class="[
         route.path === props.href
-          ? 'bg-base-300 text-base-content font-semibold'
-          : 'text-base-content/70 hover:bg-base-300/40 hover:text-base-content',
+          ? 'bg-base-200 text-base-content font-medium'
+          : 'text-base-content/60 hover:bg-base-200/60 hover:text-base-content',
         props.showLabel ? 'justify-start' : 'justify-center',
       ]"
     >
-      <Icon
-        :name="props.icon"
-        size="22"
-        class="transition-transform duration-200 group-hover:scale-105 shrink-0"
-      />
-
-      <transition name="grow">
-        <span v-if="props.showLabel" class="text-sm tracking-wide overflow-hidden text-ellipsis whitespace-nowrap">
-          {{ props.label }}
-        </span>
-      </transition>
+      <Icon :name="props.icon" size="18" class="shrink-0" />
+      <span v-if="props.showLabel" class="text-sm truncate ">
+        {{ props.label }}
+      </span>
     </nuxt-link>
   </div>
 </template>
-
-<style scoped>
-.grow-enter-active {
-  animation: grow 0.1s;
-}
-.grow-leave-active {
-  animation: grow 0.1s reverse;
-}
-@keyframes grow {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-</style>
