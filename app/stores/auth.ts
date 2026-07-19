@@ -5,10 +5,20 @@ import { computed, ref } from "vue";
 const authClient = createAuthClient();
 
 export const useAuthStore = defineStore("useAuthStore", () => {
-  const { data: session } = useFetch<{ user: any; session: any } | null>("/api/session");
+  const { data: session } = useAsyncData("auth-session", async () => {
+    try {
+      // 🟢 On récupère et on passe les cookies du navigateur au $fetch
+      const res = await $fetch<{ user: any; session: any } | null>("/api/session", {
+        headers: useRequestHeaders(["cookie"]) as Record<string, string>,
+      });
+      return res ?? null;
+    }
+    catch {
+      return null;
+    }
+  });
 
   const loading = ref(false);
-
   const user = computed(() => session.value?.user ?? null);
 
   const signIn = async () => {
