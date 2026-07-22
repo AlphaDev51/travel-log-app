@@ -13,9 +13,17 @@ const authStore = useAuthStore();
     >
       <div class="avatar">
         <div class="w-6 rounded-full">
-          <img v-if="authStore.user.image" :src="authStore.user.image" :alt="authStore.user.name">
+          <img
+            v-if="authStore.user.image"
+            :src="authStore.user.image"
+            :alt="authStore.user.name"
+          >
           <div v-else class="bg-base-300 flex items-center justify-center w-full h-full">
-            <Icon name="tabler:user" size="14" class="text-base-content/50" />
+            <Icon
+              name="tabler:user"
+              size="14"
+              class="text-base-content/50"
+            />
           </div>
         </div>
       </div>

@@ -57,7 +57,11 @@ onMounted(() => {
         <div class="flex flex-col gap-0.5 px-2 pt-3">
           <ClientOnly>
             <div v-if="sideBarStore.loading" class="flex flex-col gap-2 px-2.5 py-1">
-              <div v-for="i in 2" :key="i" class="flex items-center gap-2.5 h-6">
+              <div
+                v-for="i in 2"
+                :key="i"
+                class="flex items-center gap-2.5 h-6"
+              >
                 <div class="skeleton w-4 h-4 shrink-0 opacity-50" />
                 <div v-if="isSidebarOpen" class="skeleton h-3 w-20 opacity-40" />
               </div>
@@ -94,9 +98,17 @@ onMounted(() => {
             >
               <div class="avatar shrink-0">
                 <div class="w-6 rounded-full">
-                  <img v-if="authStore.user.image" :src="authStore.user.image" :alt="authStore.user.name">
+                  <img
+                    v-if="authStore.user.image"
+                    :src="authStore.user.image"
+                    :alt="authStore.user.name"
+                  >
                   <div v-else class="bg-base-300 flex items-center justify-center w-full h-full">
-                    <Icon name="tabler:user" size="14" class="text-base-content/50" />
+                    <Icon
+                      name="tabler:user"
+                      size="14"
+                      class="text-base-content/50"
+                    />
                   </div>
                 </div>
               </div>

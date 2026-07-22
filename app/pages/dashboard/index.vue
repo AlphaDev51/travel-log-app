@@ -28,7 +28,11 @@ onMounted(() => {
     </div>
 
     <div v-else-if="!locations || locations.length === 0" class="flex-1 flex flex-col items-center justify-center px-6 text-center gap-2">
-      <Icon name="tabler:map-off" size="28" class="text-base-content/30" />
+      <Icon
+        name="tabler:map-off"
+        size="28"
+        class="text-base-content/30"
+      />
       <p class="text-sm font-medium text-base-content/70">
         No locations yet
       </p>
@@ -43,7 +47,11 @@ onMounted(() => {
         :key="location.id"
         class="w-full text-left px-5 py-3.5 hover:bg-base-200/60 transition-colors flex items-start gap-3 group"
       >
-        <Icon name="tabler:map-pin-filled" size="16" class="text-base-content/40 group-hover:text-primary mt-0.5 shrink-0 transition-colors" />
+        <Icon
+          name="tabler:map-pin-filled"
+          size="16"
+          class="text-base-content/40 group-hover:text-primary mt-0.5 shrink-0 transition-colors"
+        />
         <div class="min-w-0 flex-1">
           <p class="text-sm font-medium text-base-content truncate">
             {{ location.name }}
