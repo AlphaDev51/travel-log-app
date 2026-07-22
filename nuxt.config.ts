@@ -39,7 +39,16 @@ export default defineNuxtConfig({
   css: ["./app/assets/css/main.css"],
   vite: {
     optimizeDeps: {
-      include: ["@vee-validate/zod", "better-auth/client", "drizzle-orm", "drizzle-orm/sqlite-core", "maplibre-gl", "drizzle-zod", "zod"],
+      include: [
+        "@vee-validate/zod",
+        "better-auth/client",
+        "better-auth/vue",
+        "drizzle-orm",
+        "drizzle-orm/sqlite-core",
+        "drizzle-zod",
+        "maplibre-gl",
+        "zod",
+      ],
     },
     plugins: [tailwindcss()],
   },

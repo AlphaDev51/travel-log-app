@@ -68,7 +68,11 @@ onBeforeRouteLeave(() => {
     </div>
 
     <form class="flex-1 overflow-y-auto flex flex-col gap-4 p-5" @submit.prevent="onSubmit">
-      <div v-if="submitError" role="alert" class="alert alert-error alert-soft text-sm">
+      <div
+        v-if="submitError"
+        role="alert"
+        class="alert alert-error alert-soft text-sm"
+      >
         <span>{{ submitError }}</span>
       </div>
 

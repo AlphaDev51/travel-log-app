@@ -12,19 +12,19 @@ export async function getUserLocation(): Promise<{ coordinates: [number, number]
     const lat = Number.parseFloat(data.latitude);
 
     if (Number.isNaN(lng) || Number.isNaN(lat))
-      throw new Error("Données invalides");
+      throw new Error("Invalid Data");
 
     return {
       coordinates: [lng, lat],
-      zoom: 11,
+      zoom: 6,
     };
   }
   catch (error) {
-    console.error("Erreur API gratuite, repli sur le centre par défaut :", error);
+    console.error("Error API: ", error);
 
     return {
       coordinates: [2.3522, 48.8566],
-      zoom: 7,
+      zoom: 4,
     };
   }
 }

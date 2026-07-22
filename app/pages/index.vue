@@ -67,10 +67,26 @@ const authStore = useAuthStore();
               <div class="h-2 w-12 bg-base-300 rounded" />
             </div>
             <div class="flex-1 relative bg-[#e8e6df] overflow-hidden">
-              <Icon name="tabler:map-pin-filled" size="18" class="absolute top-8 left-10 text-primary drop-shadow-sm" />
-              <Icon name="tabler:map-pin-filled" size="18" class="absolute top-20 left-24 text-primary drop-shadow-sm" />
-              <Icon name="tabler:map-pin-filled" size="18" class="absolute top-32 left-14 text-primary drop-shadow-sm" />
-              <Icon name="tabler:map-pin-filled" size="18" class="absolute top-14 left-32 text-primary drop-shadow-sm" />
+              <Icon
+                name="tabler:map-pin-filled"
+                size="18"
+                class="absolute top-8 left-10 text-primary drop-shadow-sm"
+              />
+              <Icon
+                name="tabler:map-pin-filled"
+                size="18"
+                class="absolute top-20 left-24 text-primary drop-shadow-sm"
+              />
+              <Icon
+                name="tabler:map-pin-filled"
+                size="18"
+                class="absolute top-32 left-14 text-primary drop-shadow-sm"
+              />
+              <Icon
+                name="tabler:map-pin-filled"
+                size="18"
+                class="absolute top-14 left-32 text-primary drop-shadow-sm"
+              />
             </div>
           </div>
         </div>

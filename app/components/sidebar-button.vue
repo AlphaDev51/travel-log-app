@@ -24,7 +24,11 @@ const route = useRoute();
         props.showLabel ? 'justify-start' : 'justify-center',
       ]"
     >
-      <Icon :name="props.icon" size="18" class="shrink-0" />
+      <Icon
+        :name="props.icon"
+        size="18"
+        class="shrink-0"
+      />
       <span v-if="props.showLabel" class="text-sm truncate ">
         {{ props.label }}
       </span>

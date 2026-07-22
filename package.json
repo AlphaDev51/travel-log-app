@@ -5,7 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "concurrently \"npm run dev:db\" \"nuxt dev\"",
-    "dev:db": "turso dev --db-file local.db",
+    "dev:db": "turso dev --db-file local.db --port 8081",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@antfu/eslint-config": "^9.0.0",
+    "@indoorequal/vue-maplibre-gl": "^8.4.2",
     "@libsql/client": "^0.17.4",
     "@nuxt/eslint": "^1.15.2",
     "@nuxt/icon": "2.2.3",
@@ -50,7 +51,8 @@
     "drizzle-kit": "^0.31.10",
     "eslint-plugin-format": "^2.0.1",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.7"
+    "lint-staged": "^17.0.7",
+    "sass-embedded": "^1.100.0"
   },
   "lint-staged": {
     "*.{ts,js,vue,yaml}": "eslint --fix"

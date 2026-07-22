@@ -5,7 +5,11 @@ const error = route.query.error || "an unknown error occurred";
 
 <template>
   <div class="max-w-md mx-auto mt-16 px-4 text-center space-y-5">
-    <Icon name="tabler:alert-triangle" size="28" class="text-error mx-auto" />
+    <Icon
+      name="tabler:alert-triangle"
+      size="28"
+      class="text-error mx-auto"
+    />
 
     <div class="space-y-2">
       <h2 class="text-lg font-semibold text-base-content">
